@@ -1,0 +1,84 @@
+from names import rand_word
+from funcs import lst_to_str,rand_letters,compare
+
+
+ctg_list = ["animal names","bird names","city names","country names","plant names"]
+level_list = ["Easy","Medium","Hard"]
+round_list = [10,5,3]
+letter_missing_list = [1,2,3]
+
+print("\t\t\t\t<----This game is made by mayuresh---->")
+print("Select the category from the followings(Enter the corresponding number): \n")
+
+for i in range(len(ctg_list)):
+    print(f"Enter {i+1} for choosing {ctg_list[i]}")
+
+player_ctg = int(input("\n Enter your choice here: "))
+player_ctg -= 1     #sub 1 for list indexing
+
+print(f"You have chosen {ctg_list[player_ctg]} as a category")
+
+player_level = int(input("Enter the difficulty level: \n1.Easy\n2.Medium\n3.Hard\n0. for rules\n"))
+
+if (player_level == 0):
+    print("Easy : Easy: one-letter missing,10 chances\nMedium : two-letters missing,5 chances\nHard : three-letter missing,3 chances")
+player_level -= 1       #Sub 1 for list indexing 
+
+if (player_level != -1):
+    print(f"You have chosen the {level_list[player_level]} level.")
+
+
+un_rand_word = rand_word(player_ctg , player_level)
+
+rand_letters = rand_letters(un_rand_word , letter_missing_list[player_level])
+
+rand_word = un_rand_word
+
+for i in range(len(rand_letters)):
+    un_rand_word = un_rand_word.replace(rand_letters[i] , "_")
+
+
+def play_game():
+    print(f"Your word is : {un_rand_word}")
+    for i in range(round_list[player_level]):
+        if (i == (round_list[player_level] - 1)):
+            player_letters = input(f"Enter your last guess: ")
+
+        player_letters = input(f"Enter your guess no {i + 1}: ")
+
+        if (len(player_letters) == letter_missing_list[player_level]):
+            player_letter_match = compare(player_letters , rand_letters)
+
+            if (player_letter_match == 0):
+                print("you haven't got any letter right,better luck next time")
+
+            elif (player_level == 0 and player_letter_match == 1):
+                chance_guessed = ["first","Second","Third","Fourth","Fifth","sixth","Seventh","Eighth","Ninth","Tenth"]
+                print(f"Congrats!You guessed the word in {chance_guessed[i]} chance.")
+                break
+
+            elif (player_level == 1):
+                if (player_letter_match == 1):
+                    print("You have guessed one letter right")
+
+                elif (player_letter_match == 2):
+                    print("Congrats!You have got both letters right")
+                    break
+
+            elif (player_level == 2):
+                if (player_letter_match == 1):
+                    print("You have guessed one right")
+                elif (player_letter_match == 2):
+                    print("You have guessed two right")
+                elif (player_letter_match == 3):
+                    print("Congrats!You have guessed all the letters")
+                    break
+
+
+
+        else:
+            print("You have exceed the limit of letters,enter number of letters equal to the missing letters")
+
+        
+
+play_game()
