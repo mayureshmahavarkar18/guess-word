@@ -16,3 +16,8 @@ word
 
 2.guess the word where all letters are shuffled and letters are missing on the basis of the hardness level.
 
+
+you can write me your suggestions at mahavarkarkishorm18@gmail.com if you wish it will be appreciated.
+
+contact:
+mahavarkarkishorm18@gmail.com
